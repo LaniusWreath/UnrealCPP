@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Bird.generated.h"
-
+//
 class UCapsuleComponent;
 class USkeletalMeshComponent;
 
@@ -26,6 +26,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	void MoveForward(float value);
 
 private:
 	UPROPERTY(VisibleAnywhere)
