@@ -40,10 +40,14 @@
               "RelativeDocumentMoniker": "CppProject\\Public\\Pawns\\Bird.h",
               "ToolTip": "C:\\Users\\tls68\\Documents\\Unreal Projects\\CppProject\\Source\\CppProject\\Public\\Pawns\\Bird.h",
               "RelativeToolTip": "CppProject\\Public\\Pawns\\Bird.h",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABYAAAApAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-04-29T02:15:24.751Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
@@ -68,10 +72,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-04-29T02:15:10.258Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             }
           ]
         }

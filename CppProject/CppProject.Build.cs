@@ -8,7 +8,8 @@ public class CppProject : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		//헤더 추가에 필요한 모듈(플러그인)이 빌드 파일에 필요함. 아래에 추가이후, 에디터 닫고 비주얼스튜디오 프로젝트 컴파일.
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

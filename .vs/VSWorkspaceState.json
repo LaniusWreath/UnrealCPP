@@ -3,12 +3,7 @@
     "",
     "\\CppProject",
     "\\CppProject\\Private",
-    "\\CppProject\\Private\\Items",
-    "\\CppProject\\Private\\Pawns",
-    "\\CppProject\\Public",
-    "\\CppProject\\Public\\Items",
-    "\\CppProject\\Public\\Pawns"
+    "\\CppProject\\Public"
   ],
-  "SelectedNode": "\\CppProject",
   "PreviewInSolutionExplorer": false
 }
