@@ -11,6 +11,8 @@ class UCapsuleComponent;
 class USkeletalMeshComponent;
 class UInputMappingContext;
 class UInputAction;
+class USpringArmComponent;
+class UCameraComponent;
 
 UCLASS()
 class CPPPROJECT_API ABird : public APawn
@@ -37,9 +39,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, category = Input)
 	UInputAction* MoveAction;
 
-	UFUNCTION()
 	void Move(const FInputActionValue& value);
 	//FInputActionValue& : Struct
+
+	void Turn(const FInputActionValue& value);
+
+	void Lookup(const FInputActionValue& value);
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -47,4 +52,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* BirdMesh;
+
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArm;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* ViewCamera;
 };
