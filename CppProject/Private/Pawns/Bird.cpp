@@ -44,12 +44,6 @@ void ABird::BeginPlay()
 			Subsystem->AddMappingContext(BirdMappingContext, 0);
 		}
 	}
-	
-}
-
-void ABird::MoveForward(float value)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Value : %f"), value);
 }
 
 void ABird::Move(const FInputActionValue& value)
@@ -62,8 +56,14 @@ void ABird::Move(const FInputActionValue& value)
 	}
 }
 
-void ABird::Turn(const FInputActionValue& value)
+void ABird::Look(const FInputActionValue& value)
 {
+	const FVector2D LookAxisValue = value.Get<FVector2D>();
+	if (GetController())
+	{
+		AddControllerYawInput(LookAxisValue.X);
+		AddControllerPitchInput(LookAxisValue.Y);
+	}
 }
 
 void ABird::Tick(float DeltaTime)
@@ -79,10 +79,10 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
+		//EnhancedInput컴포넌트에 아웃풋 함수 바인딩 : UEnhancedInputComponent->BindAction(UInputAction*, InputType ,Pawn*, &CallbackFunction)
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABird::Move);
-	}
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABird::Look);
 
-	//"이동축 인풋 함수"에 "아웃풋 함수" 바인딩 : 컴포넌트->축 바인딩 함수("축 이름(프로젝트 설정)", 대상 주소, 함수 주소)
-	//PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ABird::MoveForward);
+	}
 
 }

@@ -31,7 +31,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	void MoveForward(float value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, category = Input)
 	UInputMappingContext* BirdMappingContext;
@@ -39,12 +38,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, category = Input)
 	UInputAction* MoveAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, category = Input)
+	UInputAction* LookAction;
+
 	void Move(const FInputActionValue& value);
 	//FInputActionValue& : Struct
 
-	void Turn(const FInputActionValue& value);
-
-	void Lookup(const FInputActionValue& value);
+	void Look(const FInputActionValue& value);
 
 private:
 	UPROPERTY(VisibleAnywhere)
