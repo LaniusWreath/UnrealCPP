@@ -36,6 +36,7 @@ protected:
 	void Dodge(const FInputActionValue& Value);
 
 private:
+	//Camera
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArm;
 
