@@ -7,6 +7,7 @@
 #include "Components/InputComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 ASlashCharacter::ASlashCharacter()
@@ -15,13 +16,16 @@ ASlashCharacter::ASlashCharacter()
 
 	//카메라 세팅 - 폰 - 컨트롤러 회전 피치-요-롤 기본값 세팅 : 카메라 회전 제어 on/off
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(GetRootComponent());
 	SpringArm->TargetArmLength = 300.f;
+	SpringArm->bUsePawnControlRotation = true;
 
 	ViewCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ViewCamera"));
 	ViewCamera->SetupAttachment(SpringArm);
@@ -84,13 +88,25 @@ void ASlashCharacter::Move(const FInputActionValue& Value)
 {
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 
+	//컨트롤러 회전 Get 함수 : Controller->GetControlRotation() : 현재 컨트롤러의 회전 Yaw Pitch Roll 가져옴. Pawn 조작 기반 카메라 회전 기능 구현.
 	const FRotator Rotation = Controller->GetControlRotation();
+
+	//Z축 회전만 가져온 회전 객체 생성, FRotator (Pitch, Yaw, Roll) !Vector가 아닌 Rotator
 	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
+	//Rotator -> RotationMatrix -> Vector 변환과정 
+	// 
+	// < 3 Dimention Rotation Matrix in Unreal > 
+	//  Xaxis : [CosP*CosY,  CosP*CosY,  SinP,  OriginX] : Front Vector 
+	//  Yaxis :	[SinR*SinP*CosY - CosR*SinY,  SinR*SinP*SinY + CosR*CosY,  -SinR*CosP,  OriginY] : Right Vector 
+	//  Zaxis : [-(CosR*SinP*CosY+SinR*SinY),  CosY*SinR - CosR*SinP*SinY,  CosR*CosP,  OriginZ] : Top Vector
+	//  0     : [0,  0,  0,  1]
+	// 
+	//R[0, θ, 0] -> M[[CosPcosY, CosPSinY, ...]] -> V(M[0][0], M[0][1], M[0][2])
 	const FVector ForwardDirrection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	AddMovementInput(ForwardDirrection, MovementVector.Y);
+	AddMovementInput(ForwardDirrection, MovementVector.Y);  // W, S Key
 	const FVector RightDirrection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-	AddMovementInput(RightDirrection, MovementVector.X);
+	AddMovementInput(RightDirrection, MovementVector.X);  // A, D Key
 
 }
 
