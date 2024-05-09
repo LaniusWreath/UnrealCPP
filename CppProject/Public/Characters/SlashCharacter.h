@@ -11,7 +11,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
-
+class UGroomComponent;
 
 UCLASS()
 class CPPPROJECT_API ASlashCharacter : public ACharacter
@@ -65,4 +65,12 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* DodgeAction;
+
+	//Groom ´«½ç ÄÄÆ÷³ÍÆ®
+	UPROPERTY(VisibleAnywhere, Category = Hair)
+	UGroomComponent* Hair;
+	
+	//Groom ¸Ó¸®Ä«¶ô ÄÄÆ÷³ÍÆ®
+	UPROPERTY(VisibleAnywhere, Category = Hair)
+	UGroomComponent* Eyebrows;
 };

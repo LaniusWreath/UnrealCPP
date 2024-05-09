@@ -8,17 +8,19 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GroomComponent.h"
 
 // Sets default values
 ASlashCharacter::ASlashCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	//카메라 세팅 - 폰 - 컨트롤러 회전 피치-요-롤 기본값 세팅 : 카메라 회전 제어 on/off
+	//카메라 세팅 - 폰 - 컨트롤러 회전 피치-요-롤 기본값 세팅 : 카메라 회전 제어 on/off : 컨트롤러 입력을 따라 카메라 회전 할것인지(true시 카메라 회전에 제약생김)
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
-
+	
+	//회전 방향에 맞게 폰 회전시키기
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
 
@@ -30,6 +32,16 @@ ASlashCharacter::ASlashCharacter()
 	ViewCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ViewCamera"));
 	ViewCamera->SetupAttachment(SpringArm);
 
+	//머리카락 Groom 캐릭터 메시에 부착
+	Hair = CreateDefaultSubobject<UGroomComponent>(TEXT("Hair"));
+	//ACharacter::GetMesh() : 캐릭터 메시(Skeletal Mesh) Subobject 반환 
+	Hair->SetupAttachment(GetMesh());
+	Hair->AttachmentName = FString("Head");
+
+	//눈썹 Groom 캐릭터 메시에 부착
+	Eyebrows = CreateDefaultSubobject<UGroomComponent>(TEXT("Eyebrows"));
+	Eyebrows->SetupAttachment(GetMesh());
+	Eyebrows->AttachmentName = FString("Head");
 }
 
 void ASlashCharacter::BeginPlay()
