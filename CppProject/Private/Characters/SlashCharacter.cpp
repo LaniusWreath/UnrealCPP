@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Characters/SlashCharacter.h"
 #include "GameFramework/SpringArmComponent.h" 
 #include "Camera/CameraComponent.h"
@@ -36,12 +35,12 @@ ASlashCharacter::ASlashCharacter()
 	Hair = CreateDefaultSubobject<UGroomComponent>(TEXT("Hair"));
 	//ACharacter::GetMesh() : 캐릭터 메시(Skeletal Mesh) Subobject 반환 
 	Hair->SetupAttachment(GetMesh());
-	Hair->AttachmentName = FString("Head");
+	Hair->AttachmentName = FString("head");
 
 	//눈썹 Groom 캐릭터 메시에 부착
 	Eyebrows = CreateDefaultSubobject<UGroomComponent>(TEXT("Eyebrows"));
 	Eyebrows->SetupAttachment(GetMesh());
-	Eyebrows->AttachmentName = FString("Head");
+	Eyebrows->AttachmentName = FString("head");
 }
 
 void ASlashCharacter::BeginPlay()
