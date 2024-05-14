@@ -89,11 +89,6 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	}
 }
 
-void ASlashCharacter::MoveForward(float Value)
-{
-
-}
-
 //IA 이벤트 출력 함수
 void ASlashCharacter::Move(const FInputActionValue& Value)
 {
@@ -140,3 +135,4 @@ void ASlashCharacter::Attack(const FInputActionValue& Value)
 void ASlashCharacter::Dodge(const FInputActionValue& Value)
 {
 }
+

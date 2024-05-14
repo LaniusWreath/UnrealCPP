@@ -27,7 +27,6 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	void MoveForward(float Value);
 	//IA 이벤트 출력 함수
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
