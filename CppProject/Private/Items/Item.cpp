@@ -49,7 +49,6 @@ void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	if (SlashCharacter)
 	{
 		SlashCharacter->SetOverlappingItem(this);
-		GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Green, this->GetName());
 	}
 }
 
@@ -59,7 +58,6 @@ void AItem::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 	if (SlashCharacter)
 	{
 		SlashCharacter->SetOverlappingItem(nullptr);
-		GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, this->GetName());
 	}
 }
 

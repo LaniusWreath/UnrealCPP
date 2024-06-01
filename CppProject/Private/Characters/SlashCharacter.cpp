@@ -10,7 +10,6 @@
 #include "GroomComponent.h"
 #include "Items/Item.h"
 #include "Weapons/Weapon.h"
-#include "CppProject/DebugMacros.h"
 
 
 // Sets default values
@@ -129,7 +128,12 @@ void ASlashCharacter::Look(const FInputActionValue& Value)
 
 void ASlashCharacter::EKeyPressed(const FInputActionValue& Value)
 {
-
+	AWeapon* OverlappingWeapon = Cast<AWeapon>(OverlappingItem);
+	if (OverlappingWeapon)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString("Current Overlapped : ") + OverlappingWeapon->GetName());
+		OverlappingWeapon->Equip(GetMesh(), FName("RightHandSocket"));
+	}
 }
 
 void ASlashCharacter::Attack(const FInputActionValue& Value)
