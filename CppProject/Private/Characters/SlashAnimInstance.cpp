@@ -31,5 +31,6 @@ void USlashAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		//KismetMathLibrary(클래스)에서 메서드 호출하는 방식. 정적인 메서드(클래스의 상태나 변수를 Set하지 않음)만 갖기 때문에 객체를 만들 필요 X.
 		GroundSpeed = UKismetMathLibrary::VSizeXY(SlashCharacterMovement->Velocity);
 		IsFalling = SlashCharacterMovement->IsFalling();
+		CharacterState = SlashCharacter->GetCharacterState();
 	}
 }

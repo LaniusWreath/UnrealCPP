@@ -133,6 +133,7 @@ void ASlashCharacter::EKeyPressed(const FInputActionValue& Value)
 	{
 		GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString("Current Overlapped : ") + OverlappingWeapon->GetName());
 		OverlappingWeapon->Equip(GetMesh(), FName("RightHandSocket"));
+		CharacterState = ECharacterState::ECS_EquippedOneHandedWeapon;
 	}
 }
 
