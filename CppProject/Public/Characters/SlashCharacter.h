@@ -12,6 +12,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class UGroomComponent;
+class AItem;
 
 UCLASS()
 class CPPPROJECT_API ASlashCharacter : public ACharacter
@@ -72,4 +73,11 @@ private:
 	//Groom 머리카락 컴포넌트
 	UPROPERTY(VisibleAnywhere, Category = Hair)
 	UGroomComponent* Eyebrows;
+
+	//오버랩된 아이템
+	UPROPERTY(VisibleInstanceOnly)
+	AItem* OverlappingItem;
+
+public:
+	FORCEINLINE void SetOverlappingItem(AItem* Item) {OverlappingItem = Item;}
 };

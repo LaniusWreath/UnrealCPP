@@ -8,6 +8,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GroomComponent.h"
+#include "Items/Item.h"
+#include "Weapons/Weapon.h"
+#include "CppProject/DebugMacros.h"
+
 
 // Sets default values
 ASlashCharacter::ASlashCharacter()
@@ -59,7 +63,6 @@ void ASlashCharacter::BeginPlay()
 void ASlashCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 //EnhancedInputComponent에 IA 입출력 함수 바인딩 함수
@@ -126,6 +129,7 @@ void ASlashCharacter::Look(const FInputActionValue& Value)
 
 void ASlashCharacter::EKeyPressed(const FInputActionValue& Value)
 {
+
 }
 
 void ASlashCharacter::Attack(const FInputActionValue& Value)
