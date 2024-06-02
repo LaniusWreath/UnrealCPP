@@ -18,12 +18,12 @@ ASlashCharacter::ASlashCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	//카메라 세팅 - 폰 - 컨트롤러 회전 피치-요-롤 기본값 세팅 : 카메라 회전 제어 on/off : 컨트롤러 입력을 따라 카메라 회전 할것인지(true시 카메라 회전에 제약생김)
+	//Camera Setting
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 	
-	//회전 방향에 맞게 폰 회전시키기
+	//Pawn Rotation
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
 
@@ -95,6 +95,8 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 //IA 이벤트 출력 함수
 void ASlashCharacter::Move(const FInputActionValue& Value)
 {
+	if (ActionState == EActionState::EAS_Attacking) return;
+
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 
 	//컨트롤러 회전 Get 함수 : Controller->GetControlRotation() : 현재 컨트롤러의 회전 Yaw Pitch Roll 가져옴. Pawn 조작 기반 카메라 회전 기능 구현.
@@ -140,7 +142,7 @@ void ASlashCharacter::EKeyPressed(const FInputActionValue& Value)
 
 void ASlashCharacter::Attack(const FInputActionValue& Value)
 {
-	if (ActionState == EActionState::EAS_UnOccupied)
+	if (CanAttack())
 	{
 		PlayAttackMontage();
 		ActionState = EActionState::EAS_Attacking;
@@ -172,5 +174,16 @@ void ASlashCharacter::PlayAttackMontage()
 		}
 		AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);
 	}
+}
+
+void ASlashCharacter::AttackEnd()
+{
+	ActionState = EActionState::EAS_UnOccupied;
+}
+
+bool ASlashCharacter::CanAttack()
+{
+	return ActionState == EActionState::EAS_UnOccupied &&
+		CharacterState != ECharacterState::ECS_Unequipped;
 }
 

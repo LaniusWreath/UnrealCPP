@@ -26,8 +26,6 @@ public:
 	ASlashCharacter();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	//점프 함수(캐릭터 클래스에서 오버라이드, 입력 매개변수 필요 없음, bool)
-	//virtual void Jump() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -45,6 +43,10 @@ protected:
 	* Play Montage Functions
 	*/
 	void PlayAttackMontage();
+
+	UFUNCTION(BlueprintCallable)
+	void AttackEnd();
+	bool CanAttack();
 
 private:
 	
