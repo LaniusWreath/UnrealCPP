@@ -10,6 +10,7 @@
 #include "GroomComponent.h"
 #include "Items/Item.h"
 #include "Weapons/Weapon.h"
+#include "Animation/AnimMontage.h"
 
 
 // Sets default values
@@ -139,6 +140,25 @@ void ASlashCharacter::EKeyPressed(const FInputActionValue& Value)
 
 void ASlashCharacter::Attack(const FInputActionValue& Value)
 {
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && AttackMontage)
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+		int32 Selection = FMath::RandRange(0, 1);
+		FName SectionName = FName();
+		switch (Selection)
+		{
+		case 0:
+			SectionName = FName("Attack1");
+			break;
+		case 1:
+			SectionName = FName("Attack2");
+			break;
+		default:
+			break;
+		}
+		AnimInstance->Montage_JumpToSection(SectionName, AttackMontage);
+	}
 }
 
 void ASlashCharacter::Dodge(const FInputActionValue& Value)

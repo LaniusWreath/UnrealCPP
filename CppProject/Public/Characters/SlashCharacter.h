@@ -14,6 +14,7 @@ class UInputMappingContext;
 class UInputAction;
 class UGroomComponent;
 class AItem;
+class UAnimMontage;
 
 
 UCLASS()
@@ -83,7 +84,13 @@ private:
 	UPROPERTY(VisibleInstanceOnly)
 	AItem* OverlappingItem;
 
+	/*
+	* Animation Montages
+	*/
+	UPROPERTY(EditDefaultsOnly, Category = Montages)
+	UAnimMontage* AttackMontage;
+
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* Item) {OverlappingItem = Item;}
-	FORCEINLINE ECharacterState GetCharacterState() {return CharacterState;}
+	FORCEINLINE ECharacterState GetCharacterState() const {return CharacterState;}
 }; 
