@@ -31,16 +31,25 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	//IA 이벤트 출력 함수
+
+	/*
+	* Callbacks for Input
+	*/
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void EKeyPressed(const FInputActionValue& Value);
 	void Attack(const FInputActionValue& Value);
 	void Dodge(const FInputActionValue& Value);
+	
+	/*
+	* Play Montage Functions
+	*/
+	void PlayAttackMontage();
 
 private:
 	
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+	EActionState ActionState = EActionState::EAS_UnOccupied;
 
 	//Camera
 	UPROPERTY(VisibleAnywhere)
